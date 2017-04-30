@@ -8,7 +8,7 @@ export default class Files extends React.Component{
 
   render(){
     var data = this.state;
-    if(data.type == "file"){
+    if(data.type == "note"){
       return(
       <div className="row col-md-12">
          <div className= "pull-left">

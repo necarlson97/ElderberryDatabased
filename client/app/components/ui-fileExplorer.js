@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Files from './files.js'
-import {getData} from '../server.js';
+import {getMasterFolderData} from '../server.js';
 
 export default class UIfileExplorer extends React.Component {
   constructor(props) {
@@ -12,7 +12,7 @@ export default class UIfileExplorer extends React.Component {
   }
 
   refresh() {
-    getData(4 , (Data) => {
+    getMasterFolderData(4 , (Data) => {
       this.setState(Data);
     });
   }
@@ -34,7 +34,6 @@ export default class UIfileExplorer extends React.Component {
                       <div className="tabbable-line">
                         <h2>Files</h2>
                         <div className="contentBox">
-
                           <div className= "col-md-12">
                             {this.state.contents.map((Data) => {
                               return(
@@ -42,7 +41,6 @@ export default class UIfileExplorer extends React.Component {
                               )
                             })}
                           </div>
-
                         </div>
                       </div>
                     </div>

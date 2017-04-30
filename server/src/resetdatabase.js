@@ -35,6 +35,8 @@ var initialData = {
       "_id": new ObjectID("000000000000000000000001"),
 
       "type": "note",
+      "idx": "1",
+      "title":"Screenplay",
       "contents": {
         // ID of the user that posted the status update.
         "author": new ObjectID("000000000000000000000004"),
@@ -48,6 +50,8 @@ var initialData = {
     "2": {
       "_id": new ObjectID("000000000000000000000002"),
       "type": "note",
+      "idx":"2",
+      "title":"Gym",
       "contents": {
         "author": new ObjectID("000000000000000000000004"),
         "postDate": 1458231460117,

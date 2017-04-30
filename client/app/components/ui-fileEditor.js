@@ -15,7 +15,6 @@ export default class UIfileEditor extends React.Component {
     getMasterFolderData(4, (Data) => {
       this.setState(Data);
     });
-    console.log(this.state);
   }
 
   componentDidMount() {
@@ -54,7 +53,7 @@ export default class UIfileEditor extends React.Component {
                                   <tbody>
                                     {this.state.contents.map((Data) => {
                                       return(
-                                        <Trash key={Data._id} data={Data} fileDelete={(idx, author) => this.fileDelete(idx, author)}/>
+                                        <Trash key={Data.idx} data={Data} fileDelete={(idx, author) => this.fileDelete(idx, author)}/>
                                       )
                                     })}
                                   </tbody>

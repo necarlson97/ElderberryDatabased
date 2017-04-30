@@ -9,7 +9,7 @@ import {unixTimeToString} from './util.js';
 
     render(){
       var data = this.state;
-      if(data.type == "file"){
+      if(data.type == "note"){
         return(
       <tr>
         <td className="text-center"><span className="glyphicon glyphicon-file"></span></td>
@@ -18,7 +18,7 @@ import {unixTimeToString} from './util.js';
           <a href="#"><span className="btn btn-sm btn-danger glyphicon glyphicon-trash"></span></a>
           <a href="#"><span className="btn btn-sm btn-primary glyphicon glyphicon-pencil"></span></a>
         </td>
-        <td>{unixTimeToString(data.postDate)}</td>
+        <td>{unixTimeToString(data.contents.postDate)}</td>
       </tr>
       )
     }
@@ -31,7 +31,7 @@ import {unixTimeToString} from './util.js';
           <a href="#"><span className="btn btn-sm btn-danger glyphicon glyphicon-trash"></span></a>
           <a href="#"><span className="btn btn-sm btn-primary glyphicon glyphicon-pencil"></span></a>
         </td>
-        <td>{unixTimeToString(data.postDate)}</td>
+        <td>{unixTimeToString(data.contents.postDate)}</td>
       </tr>
       )
     }
@@ -44,7 +44,7 @@ import {unixTimeToString} from './util.js';
             <a href="#"><span className="btn btn-sm btn-danger glyphicon glyphicon-trash"></span></a>
             <a href="#"><span className="btn btn-sm btn-primary glyphicon glyphicon-pencil"></span></a>
           </td>
-          <td>{unixTimeToString(data.postDate)}</td>
+          <td>{unixTimeToString(data.contents.postDate)}</td>
         </tr>
         )
       }
