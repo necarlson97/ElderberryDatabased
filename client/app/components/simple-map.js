@@ -1,5 +1,6 @@
 import React from 'react';
 import { Gmaps, Marker, InfoWindow } from 'react-gmaps';
+import {getMasterFolderData, getContentItem} from '../server.js';
 
 export default class SimpleMap extends React.Component {
   constructor(){
@@ -11,10 +12,7 @@ export default class SimpleMap extends React.Component {
         longitude: -72.521
       },
 
-      contents: [ "Gym:",
-        "Leg day",
-        "Biceps",
-        "Pay fees" ]
+      contents: "none 1"
     }
 
     var event1 = {
@@ -23,9 +21,7 @@ export default class SimpleMap extends React.Component {
         longitude: -72.511
       },
 
-      contents: [ "Kennel:",
-        "Get lacy",
-        "File complaint" ]
+      contents: "none 2"
     }
 
     this.state = {
@@ -41,6 +37,7 @@ export default class SimpleMap extends React.Component {
     };
 
     this.showWindow = this.showWindow.bind(this);
+    this.gotData = this.gotData.bind(this);
   }
 
   onMapCreated(map) {
@@ -55,18 +52,6 @@ export default class SimpleMap extends React.Component {
       rotateControl:true,
       zoom:13
     });
-  }
-
-  onClick(e){
-    console.log('onClick', e);
-  }
-
-  onHover(e){
-    console.log('onHover', e);
-  }
-
-  onDragEnd(e) {
-    console.log('onDragEnd', e);
   }
 
   showWindow(windowIndex) {
@@ -85,6 +70,28 @@ export default class SimpleMap extends React.Component {
       if(newWindowArray.indexOf(newWindow) == -1) newWindowArray.push(newWindow);
       that.setState({windowArray: newWindowArray});
     }
+  }
+
+  getUserNotes(userId) {
+    var userNotes = getMasterFolderData(userId, (Data) => {
+      this.gotData(Data);
+    });
+  }
+
+  gotData(data){
+    console.log("gotData: ",data.contents);
+    var userNotes = data.contents;
+
+    var newState = this.state;
+
+    for(var i=0; i<userNotes.length; i++){
+      var noteString = userNotes[i].contents.contents;
+      console.log("note ",i," : ",noteString)
+      newState.events[i].contents = noteString;
+    }
+    console.log("New State: ",newState)
+    this.setState(newState);
+    console.log("State: ",this.state)
   }
 
   componentWillMount() {
@@ -109,17 +116,20 @@ export default class SimpleMap extends React.Component {
     }
     this.setState({markerArray: newMarkerArray});
 
+    this.getUserNotes(4);
   }
 
   eventToWindow(eventIndex){
     var contents = this.state.events[eventIndex].contents;
+    console.log("event index ", eventIndex, "found ", contents)
+    var splitContents = contents.split("\n");
+    var str = "<b>"+splitContents[0]+"</b>";
 
-    if(contents.length == 0) return "Empty";
-    var str = "<b>"+contents[0]+"</b>";
+    if(splitContents.length < 2) return str;
 
     var i = 1;
-    while(i<contents.length){
-      str+="<div>"+contents[i]+"</div>";
+    while(i<splitContents.length){
+      str+="<div>"+splitContents[i]+"</div>";
       i++;
     }
     return str;

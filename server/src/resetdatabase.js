@@ -52,7 +52,7 @@ var initialData = {
         "author": new ObjectID("000000000000000000000004"),
         "postDate": 1458231460117,
         "location": "LOCATION",
-        "contents": "Gym stuff/nyay/ndouble yay"
+        "contents": "Gym stuff\nyay\ndouble yay"
       }
     }
   },
