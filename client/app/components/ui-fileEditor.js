@@ -53,7 +53,7 @@ export default class UIfileEditor extends React.Component {
                                   <tbody>
                                     {this.state.contents.map((Data) => {
                                       return(
-                                        <Trash key={Data.idx} data={Data} fileDelete={(idx, author) => this.fileDelete(idx, author)}/>
+                                        <Trash key={Data.idx} data={Data} />
                                       )
                                     })}
                                   </tbody>
