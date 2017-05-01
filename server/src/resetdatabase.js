@@ -36,7 +36,7 @@ var initialData = {
 
       "type": "note",
       "idx": "1",
-      "title":"Screenplay",
+      "title":"Kennel Stuff",
       "contents": {
         // ID of the user that posted the status update.
         "author": new ObjectID("000000000000000000000004"),
@@ -44,19 +44,35 @@ var initialData = {
         // (# of milliseconds since Jan 1 1970 UTC)
         // https://en.wikipedia.org/wiki/Unix_time
         "postDate": 1453668480000,
-        "contents": "Ideas for a screenplay: ehhh!"
+        "contents": "To do:\nGet spike from kennel\npay cleaning fees"
       }
     },
     "2": {
       "_id": new ObjectID("000000000000000000000002"),
       "type": "note",
       "idx":"2",
-      "title":"Gym",
+      "title":"Gym Workout",
       "contents": {
         "author": new ObjectID("000000000000000000000004"),
         "postDate": 1458231460117,
         "location": "LOCATION",
-        "contents": "Gym stuff\nyay\ndouble yay"
+        "contents": "Workout:\n100 crunches\n10min rowing\n10 min yoga"
+      },
+      "3": {
+        "_id": new ObjectID("000000000000000000000001"),
+
+        "type": "note",
+        "idx": "1",
+        "title":"Screenplay",
+        "contents": {
+          // ID of the user that posted the status update.
+          "author": new ObjectID("000000000000000000000004"),
+          // 01/24/16 3:48PM EST, converted to Unix Time
+          // (# of milliseconds since Jan 1 1970 UTC)
+          // https://en.wikipedia.org/wiki/Unix_time
+          "postDate": 1453668480000,
+          "contents": "Ideas for a screenplay: \nThis one robot cool guy is awesome. End!"
+        }
       }
     }
   },
