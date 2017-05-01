@@ -44,6 +44,7 @@ var initialData = {
         // (# of milliseconds since Jan 1 1970 UTC)
         // https://en.wikipedia.org/wiki/Unix_time
         "postDate": 1453668480000,
+        "location": "LOCATION",
         "contents": "To do:\nGet spike from kennel\npay cleaning fees"
       }
     },
@@ -57,22 +58,54 @@ var initialData = {
         "postDate": 1458231460117,
         "location": "LOCATION",
         "contents": "Workout:\n100 crunches\n10min rowing\n10 min yoga"
-      },
-      "3": {
-        "_id": new ObjectID("000000000000000000000001"),
-
-        "type": "note",
-        "idx": "1",
-        "title":"Screenplay",
-        "contents": {
-          // ID of the user that posted the status update.
-          "author": new ObjectID("000000000000000000000004"),
-          // 01/24/16 3:48PM EST, converted to Unix Time
-          // (# of milliseconds since Jan 1 1970 UTC)
-          // https://en.wikipedia.org/wiki/Unix_time
-          "postDate": 1453668480000,
-          "contents": "Ideas for a screenplay: \nThis one robot cool guy is awesome. End!"
-        }
+      }
+    },
+    "3": {
+      "_id": new ObjectID("000000000000000000000003"),
+      "type": "note",
+      "idx": "3",
+      "title":"Screenplay",
+      "contents": {
+        "author": new ObjectID("000000000000000000000004"),
+        "postDate": 1453668481230,
+        "location": "LOCATION",
+        "contents": "Ideas for a screenplay: \nThis one robot cool guy is awesome. End!"
+      }
+    },
+    "4": {
+      "_id": new ObjectID("000000000000000000000004"),
+      "type": "note",
+      "idx":"4",
+      "title":"Grandma's meds",
+      "contents": {
+        "author": new ObjectID("000000000000000000000004"),
+        "postDate": 1458231460239,
+        "location": "LOCATION",
+        "contents": "Gam Gams Meds:\n10ml Asprin\n20ml Super-Fiber"
+      }
+    },
+    "5": {
+      "_id": new ObjectID("000000000000000000000005"),
+      "type": "note",
+      "idx":"5",
+      "title":"CS conference reminder",
+      "contents": {
+        "author": new ObjectID("000000000000000000000004"),
+        "postDate": 1458231460239,
+        "location": "LOCATION",
+        "contents": "Rember:\nlaptop, keys, phone, speech binder"
+      }
+    },
+    "6": {
+      "_id": new ObjectID("000000000000000000000006"),
+      "type": "note",
+      "idx":"6",
+      "title":"Craigs Birthday Gift Ideas",
+      "contents": {
+        "author": new ObjectID("000000000000000000000004"),
+        "postDate": 1458231460239,
+        "location": "LOCATION",
+        "contents": "Literaly I have nothing... Baseball cap?"
       }
     }
   },
@@ -81,7 +114,8 @@ var initialData = {
     "4": {
       "_id": new ObjectID("000000000000000000000004"),
       // Listing of FeedItems in the feed.
-      "contents": [new ObjectID("000000000000000000000002"), new ObjectID("000000000000000000000001")]
+      "contents": [new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000002"), new ObjectID("000000000000000000000003"),
+      new ObjectID("000000000000000000000004"), new ObjectID("000000000000000000000005"), new ObjectID("000000000000000000000006")]
     },
     "3": {
       "_id": new ObjectID("000000000000000000000003"),
@@ -99,15 +133,15 @@ var initialData = {
 };
 
 /**
- * Adds any desired indexes to the database.
- */
+* Adds any desired indexes to the database.
+*/
 function addIndexes(db, cb) {
   db.collection('contentItems').createIndex({ "contents.contents": "text" }, null, cb);
 }
 
 /**
- * Resets a collection.
- */
+* Resets a collection.
+*/
 function resetCollection(db, name, cb) {
   // Drop / delete the entire object collection.
   db.collection(name).drop(function() {
@@ -122,9 +156,9 @@ function resetCollection(db, name, cb) {
 }
 
 /**
- * Reset the MongoDB database.
- * @param db The database connection.
- */
+* Reset the MongoDB database.
+* @param db The database connection.
+*/
 function resetDatabase(db, cb) {
   // The code below is a bit complex, but it basically emulates a
   // "for" loop over asynchronous operations.
