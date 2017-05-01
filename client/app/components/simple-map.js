@@ -36,8 +36,10 @@ export default class SimpleMap extends React.Component {
       markerArray: []
     };
 
+    this.updateLocation = this.updateLocation.bind(this);
     this.showWindow = this.showWindow.bind(this);
     this.gotData = this.gotData.bind(this);
+
   }
 
   onMapCreated(map) {
@@ -55,9 +57,10 @@ export default class SimpleMap extends React.Component {
   }
 
   showWindow(windowIndex) {
-    console.log('showWindow', windowIndex);
+    console.log('showWindow OUT', windowIndex);
     var that = this;
     return function() {
+      console.log('showWindow IN', windowIndex);
       var newWindow =
         <InfoWindow
           lat={that.state.events[windowIndex].location.latitude}
@@ -70,6 +73,24 @@ export default class SimpleMap extends React.Component {
       if(newWindowArray.indexOf(newWindow) == -1) newWindowArray.push(newWindow);
       that.setState({windowArray: newWindowArray});
     }
+  }
+
+  updateLocation(windowIndex, e) {
+    console.log('updateLocation OUT ', windowIndex, "\n", e);
+    console.log('updateLocation IN ', e);
+    const { latLng } = e;
+    var newLocation = {
+      latitude: latLng.lat(),
+      longitude: latLng.lng()
+    }
+    var newState = this.state;
+    newState.events[windowIndex-2].location =
+        newLocation;
+
+    console.log("New event: ",newState.events[windowIndex-2])
+    this.setState(newState);
+    console.log("State: ",this.state)
+
   }
 
   getUserNotes(userId) {
@@ -109,7 +130,8 @@ export default class SimpleMap extends React.Component {
           lat={this.state.events[i].location.latitude}
           lng={this.state.events[i].location.longitude}
           draggable={true}
-          onClick={this.showWindow(i)}/>
+          onClick={this.showWindow(i)}
+          onDragEnd={ (e) => this.updateLocation(i, e) }/>
       ;
 
       newMarkerArray.push(newMarker);
